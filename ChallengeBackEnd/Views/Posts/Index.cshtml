@@ -20,9 +20,6 @@
                 @Html.DisplayNameFor(model => model.Resumo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Conteudo)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Views)
             </th>
             <th>
@@ -41,9 +38,6 @@
                 @Html.DisplayFor(modelItem => item.Resumo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Conteudo)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Views)
             </td>
             <td>
@@ -54,7 +48,6 @@
                 <a asp-action="Details" asp-route-id="@item.PostID">Detalhes</a> |
                 <a asp-action="Delete" asp-route-id="@item.PostID">Remover</a>
             </td>
-        </tr>
-}
+        </tr>}
     </tbody>
 </table>

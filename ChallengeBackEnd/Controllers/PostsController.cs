@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ChallengeBackEnd.Data;
 using ChallengeBackEnd.Models;
 using System;
+using System.Collections.Generic;
 
 namespace ChallengeBackEnd.Controllers
 {
@@ -20,7 +21,7 @@ namespace ChallengeBackEnd.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+            return View(await _context.Posts.OrderByDescending(p => p.PostID).Take(5).OrderByDescending(p => p.Likes).ToListAsync());
         }
 
         // GET: Posts/Details/5
