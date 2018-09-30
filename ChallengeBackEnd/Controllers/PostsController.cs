@@ -61,7 +61,7 @@ namespace ChallengeBackEnd.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PostID,Titulo,Conteudo,Views,Likes")] Post post)
+        public async Task<IActionResult> Create([Bind("PostID,Titulo,Resumo,Conteudo,Views,Likes")] Post post)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace ChallengeBackEnd.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PostID,Titulo,Conteudo,Views,Likes")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("PostID,Titulo,Resumo,Conteudo,Views,Likes")] Post post)
         {
             if (id != post.PostID)
             {
