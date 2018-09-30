@@ -13,9 +13,20 @@ namespace ChallengeBackEnd.Controllers
 
         public PostsController(ApplicationDbContext context) => _context = context;
 
-        public async Task<IActionResult> Index() =>
-            View(await _context.Posts.OrderByDescending(p => p.PostID).Take(5).OrderByDescending(p => p.Likes).ToListAsync());
+        public async Task<IActionResult> Index()
+        {
+            var postsViewModel = new PostsViewModel()
+            {
+                 Posts = await _context.Posts.OrderByDescending(p => p.PostID).OrderByDescending(p => p.Likes).ToListAsync()
+            };
+            foreach(var post in postsViewModel.Posts)
+            {
+                post.PercentualLikesSobreTotal = (post.Likes / (double)postsViewModel.TotalDeLikes.Value) * 100;
+                post.PercentualViewsSobreTotal = (post.Views / (double)postsViewModel.TotalDeViews.Value) * 100;
+            }
 
+            return View(postsViewModel);
+        }
 
         public async Task<IActionResult> Details(int? id)
         {

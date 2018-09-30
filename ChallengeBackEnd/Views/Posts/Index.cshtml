@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ChallengeBackEnd.Models.Post>
+﻿@model ChallengeBackEnd.Models.PostsViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,40 +14,68 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Titulo)
+                Título
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Resumo)
+                Resumo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Views)
+                Views
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Likes)
+                %
+            </th>
+            <th>
+                Likes
+            </th>
+            <th>
+                %
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resumo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Views)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Likes)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PostID">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.PostID">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.PostID">Remover</a>
-            </td>
-        </tr>}
+        @foreach (var item in Model.Posts.Take(5))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resumo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Views)
+                </td>
+                <td>
+                    @item.PercentualViewsSobreTotal.ToString("F2")% 
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Likes)</td>
+                <td>
+                    @item.PercentualLikesSobreTotal.ToString("F2")%
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PostID">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.PostID">Ver</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PostID">Remover</a>
+                </td>
+            </tr>
+        }
+
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total de views do blog</td>
+            <td>
+                @Model.TotalDeViews
+            </td>
+            <td>Total de likes do blog</td>
+            <td>
+                @Model.TotalDeLikes
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
 </table>
