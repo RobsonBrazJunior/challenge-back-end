@@ -39,16 +39,16 @@ namespace ChallengeBackEnd.Controllers
                 return NotFound();
             }
 
-            ContabilizarViews(post);
+            await ContabilizarViewsAsync(post);
 
             return View(post);
         }
 
-        private void ContabilizarViews(Post post)
+        private async Task ContabilizarViewsAsync(Post post)
         {
             post.Views += 1;
             _context.Update(post);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         // GET: Posts/Create
